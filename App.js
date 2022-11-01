@@ -6,6 +6,15 @@ export default class App extends Component {
     currentEmoji: require('./assets/emoji/love.png'),
   };
 
+  datas = [
+    require('./assets/emoji/angry.png'),
+    require('./assets/emoji/care.png'),
+    require('./assets/emoji/haha.png'),
+    require('./assets/emoji/like.png'),
+    require('./assets/emoji/love.png'),
+    require('./assets/emoji/sad.png'),
+  ];
+
   _onClickChangeEmoji = currentEmoji => {
     this.setState({
       currentEmoji,
@@ -18,60 +27,13 @@ export default class App extends Component {
         <Text style={styles.header}>How are you feeling?</Text>
         <Image style={styles.currentEmoji} source={this.state.currentEmoji} />
         <View style={styles.emojiListContainer}>
-          <TouchableOpacity
-            onPress={() =>
-              this._onClickChangeEmoji(require('./assets/emoji/angry.png'))
-            }>
-            <Image
-              style={styles.emoji}
-              source={require('./assets/emoji/angry.png')}
-            />
-          </TouchableOpacity>
-          <TouchableOpacity
-            onPress={() =>
-              this._onClickChangeEmoji(require('./assets/emoji/care.png'))
-            }>
-            <Image
-              style={styles.emoji}
-              source={require('./assets/emoji/care.png')}
-            />
-          </TouchableOpacity>
-          <TouchableOpacity
-            onPress={() =>
-              this._onClickChangeEmoji(require('./assets/emoji/haha.png'))
-            }>
-            <Image
-              style={styles.emoji}
-              source={require('./assets/emoji/haha.png')}
-            />
-          </TouchableOpacity>
-          <TouchableOpacity
-            onPress={() =>
-              this._onClickChangeEmoji(require('./assets/emoji/like.png'))
-            }>
-            <Image
-              style={styles.emoji}
-              source={require('./assets/emoji/like.png')}
-            />
-          </TouchableOpacity>
-          <TouchableOpacity
-            onPress={() =>
-              this._onClickChangeEmoji(require('./assets/emoji/love.png'))
-            }>
-            <Image
-              style={styles.emoji}
-              source={require('./assets/emoji/love.png')}
-            />
-          </TouchableOpacity>
-          <TouchableOpacity
-            onPress={() =>
-              this._onClickChangeEmoji(require('./assets/emoji/sad.png'))
-            }>
-            <Image
-              style={styles.emoji}
-              source={require('./assets/emoji/sad.png')}
-            />
-          </TouchableOpacity>
+          {this.datas.map((emoji, index) => {
+            return (
+              <TouchableOpacity onPress={() => this._onClickChangeEmoji(emoji)}>
+                <Image style={styles.emoji} source={emoji} />
+              </TouchableOpacity>
+            );
+          })}
         </View>
       </View>
     );
@@ -96,8 +58,9 @@ const styles = StyleSheet.create({
   },
   emojiListContainer: {
     flexDirection: 'row',
-    justifyContent: 'center',
+    justifyContent: 'space-evenly',
     alignItems: 'center',
+    width: '100%',
   },
   emoji: {
     width: 34,
